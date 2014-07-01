@@ -91,7 +91,6 @@ class SoundPlayer {
         signalPlayer.playAtTime( now() + time + shortStartDelay );
     }
     
-
     func stopAll(){
         beatPlayer.stop();
         countdownPlayer.stop();
