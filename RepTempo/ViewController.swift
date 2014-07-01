@@ -21,49 +21,94 @@ class ViewController: UIViewController {
     @IBOutlet var startButton : UIButton;
     @IBOutlet var stopButton  : UIButton;
     
-    var totalRep    : Int? = 0;
-    var eccentric   : Int? = 0;
-    var hold        : Int? = 0;
-    var concentric  : Int? = 0;
-    var opt         : Int? = 0;
+    var totalRep    : Int = 0;
+    var eccentric   : Int = 0;
+    var hold        : Int = 0;
+    var concentric  : Int = 0;
+    var opt         : Int = 0;
     
     var repCounter  : Int = 0;
     var eccCounter  : Int = 0;
     var conCounter  : Int = 0;
     
     var updateTimer : NSTimer? = nil;
-    var beatTimer   : NSTimer? = nil;
     
     var timeInMilliseconds  : Float = 0.000;
-    var timeInSeconds       : Int = 0;
     
     var stopButtonTitle : String = "Stop";
     var isPaused : Bool = false;
     
     let sfxPlayer = SoundPlayer();
     
+    let interval : NSTimeInterval = 0.016667;
+    
     @IBAction func backgroundTap() {
         view.endEditing(true);
     }
     
     @IBAction func processTotalRep(sender : AnyObject) {
-        totalRep = totalRepField.text.toInt();
+        
+        if let res = totalRepField.text.toInt() {
+            
+            totalRep = res;
+        
+        } else {
+        
+            totalRep = 0;
+            totalRepField.text = String(totalRep);
+        }
     }
     
     @IBAction func processEccentric(sender : AnyObject) {
-        eccentric = eccentricField.text.toInt();
+        
+        if let res = eccentricField.text.toInt() {
+        
+            eccentric = res;
+        
+        } else {
+        
+            eccentric = 0;
+            eccentricField.text = String(eccentric);
+        }
     }
     
     @IBAction func processHold(sender : AnyObject) {
-        hold = holdField.text.toInt();
+        
+        if let res = holdField.text.toInt() {
+            
+            hold = res;
+            
+        } else {
+        
+            hold = 0;
+            holdField.text = String(hold);
+        }
     }
     
     @IBAction func processConcentric(sender : AnyObject) {
-        concentric = concentricField.text.toInt();
+        
+        if let res = concentricField.text.toInt() {
+            
+            concentric = res;
+            
+        } else {
+        
+            concentric = 0;
+            concentricField.text = String(concentric);
+        }
     }
     
     @IBAction func processOptHold(sender : AnyObject) {
-        opt = optField.text.toInt();
+        
+        if let res = optField.text.toInt() {
+            
+            opt = res;
+            
+        } else {
+            
+            opt = 0;
+            optField.text = String(opt);
+        }
     }
     
     
@@ -75,12 +120,9 @@ class ViewController: UIViewController {
         stopButtonTitle = "Stop";
         stopButton.setTitle(stopButtonTitle, forState: UIControlState.Normal);
         
-        updateTimer = NSTimer.scheduledTimerWithTimeInterval(0.001, target: self, selector: "updateTimerLabel", userInfo: nil, repeats: true);
-        
-        beatTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "updateBeatTimer", userInfo: nil, repeats: true);
+        updateTimer = NSTimer.scheduledTimerWithTimeInterval(interval, target: self, selector: "update", userInfo: nil, repeats: true);
         
         sfxPlayer.playCountdown();
-        
     }
     
     @IBAction func stopTimer(sender : AnyObject) {
@@ -103,7 +145,6 @@ class ViewController: UIViewController {
                 timerLabel.text = "0.000";
                 timeInMilliseconds = 0.000;
                 
-                timeInSeconds = 0;
                 repCounter = 0;
                 eccCounter = 0;
                 conCounter = 0;
@@ -114,56 +155,52 @@ class ViewController: UIViewController {
                 updateTimer!.invalidate();
                 updateTimer = nil;
             
-                beatTimer!.invalidate();
-                beatTimer = nil;
             
             default:
                 break;
         }
     }
     
-    func updateBeatTimer(){
+    func update(){
         
         if !isPaused {
             
-            timeInSeconds++;
-            eccCounter++;
-            conCounter++;
+            timeInMilliseconds += Float(interval);
+            timerLabel.text = String(format: "%.3f", timeInMilliseconds);
+
+            let countdownDuration = Float(sfxPlayer.countdownPlayer.duration);
             
-            let countdownDuration = Int(sfxPlayer.countdownPlayer.duration);
-            
-            if timeInSeconds >= countdownDuration {
+            if timeInMilliseconds > countdownDuration {
                 
                 sfxPlayer.playBeat();
                 
-                let totalEccentricTime  = eccentric! + hold! + countdownDuration;
-                let totalConcentricTime = concentric! + opt! + countdownDuration;
+                eccCounter++;
+                conCounter++;
+            
+
+                let totalEccentricTime  = eccentric + hold + Int(countdownDuration);
+                let totalConcentricTime = concentric + opt + Int(countdownDuration);
                 
-                if eccCounter == totalEccentricTime ||
-                   conCounter == totalConcentricTime
-                {
+                let eccFlag = eccCounter % totalEccentricTime == 0;
+                let conFlag = conCounter % totalConcentricTime == 0;
+
+                if eccFlag || conFlag {
                     
                     sfxPlayer.playSignal();
                     
-                    repCounter = (conCounter == totalConcentricTime ? repCounter+1 : repCounter);
+                    repCounter = (conFlag ? repCounter+1 : repCounter);
                     
                     if repCounter == totalRep {
                         
+                        sfxPlayer.playFinish();
                         
+                        stopTimer(self);
                     }
                 }
             }
         }
     }
     
-    func updateTimerLabel(){
-        
-        if !isPaused {
-            
-            timeInMilliseconds += 0.001;
-            timerLabel.text = String(format: "%.3f", timeInMilliseconds);
-        }
-    }
     
     override func viewDidLoad() {
         

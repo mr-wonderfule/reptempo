@@ -25,6 +25,8 @@ class SoundPlayer {
     var signalURL : NSURL;
     var signalPlayer : AVAudioPlayer;
     
+    let shortStartDelay : NSTimeInterval = 0.01;
+    
     init(){
         
         audioSession = AVAudioSession.sharedInstance();
@@ -53,22 +55,43 @@ class SoundPlayer {
         
     }
     
+    func now() -> NSTimeInterval {
+        return beatPlayer.deviceCurrentTime;
+    }
+    
     func playBeat(){
-        beatPlayer.play();
+        beatPlayer.playAtTime( now() + shortStartDelay );
     }
     
     func playCountdown() {
-        countdownPlayer.play();
+        countdownPlayer.playAtTime( now() + shortStartDelay );
     }
     
     func playFinish(){
-        finishPlayer.play();
+        finishPlayer.playAtTime( now() + shortStartDelay );
     }
     
     func playSignal() {
-        signalPlayer.play();
+        signalPlayer.playAtTime( now() + shortStartDelay );
     }
     
+    func playBeat(time : NSTimeInterval){
+        beatPlayer.playAtTime( now() + time + shortStartDelay );
+    }
+    
+    func playCountdown(time : NSTimeInterval) {
+        countdownPlayer.playAtTime( now() + time + shortStartDelay );
+    }
+    
+    func playFinish(time : NSTimeInterval){
+        finishPlayer.playAtTime( now() + time + shortStartDelay );
+    }
+    
+    func playSignal(time : NSTimeInterval) {
+        signalPlayer.playAtTime( now() + time + shortStartDelay );
+    }
+    
+
     func stopAll(){
         beatPlayer.stop();
         countdownPlayer.stop();
