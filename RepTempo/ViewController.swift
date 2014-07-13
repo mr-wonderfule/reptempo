@@ -8,20 +8,9 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
-    @IBOutlet var totalRepField     : UITextField;
-    @IBOutlet var eccentricField    : UITextField;
-    @IBOutlet var holdField         : UITextField;
-    @IBOutlet var concentricField   : UITextField;
-    @IBOutlet var optField          : UITextField;
-    
-    @IBOutlet var timerLabel : UILabel;
-    
-    @IBOutlet var startButton : UIButton;
-    @IBOutlet var stopButton  : UIButton;
-    
-    var totalRep    : Int = 0;
+    var totalReps   : Int = 10;
     var eccentric   : Int = 0;
     var hold        : Int = 0;
     var concentric  : Int = 0;
@@ -42,76 +31,49 @@ class ViewController: UIViewController {
     
     let interval : NSTimeInterval = 0.016667;
     
+    let optionLabels : [String] = ["0", "1", "2", "3",
+                              "4", "5", "6", "7",
+                              "8", "9", "10"];
+    let maxReps : Int = 9999;
+    let numberOfOptions : Int = 4;
+
+    let invalidInputAlert : UIAlertView = UIAlertView(title: "Invalid number!", message: "Not a number. Please try again.", delegate: nil, cancelButtonTitle: "OKAYJOSE");
+    
+    @IBOutlet var totalRepField     : UITextField;
+    
+    @IBOutlet var timerLabel : UILabel;
+    
+    @IBOutlet var startButton : UIButton;
+    @IBOutlet var stopButton  : UIButton;
+
+    @IBOutlet var eccentricSegmentedControl: UISegmentedControl;
+    @IBOutlet var concentricSegmentedControl: UISegmentedControl;
+    
+    @IBAction func setTotalReps(sender : AnyObject) {
+        
+        if let reps = totalRepField.text.toInt() {
+            
+            totalReps = reps;
+        
+        } else {
+            
+            invalidInputAlert.show();
+        }
+    }
+    
     @IBAction func backgroundTap() {
+        totalRepField.resignFirstResponder();
         view.endEditing(true);
     }
     
-    @IBAction func processTotalRep(sender : AnyObject) {
+    @IBAction func sanitizeInput(sender: AnyObject) {
+        setTotalReps(sender);
         
-        if let res = totalRepField.text.toInt() {
+        if totalReps > maxReps {
             
-            totalRep = res;
-        
-        } else {
-        
-            totalRep = 0;
-            totalRepField.text = String(totalRep);
+            totalReps = maxReps;
         }
     }
-    
-    @IBAction func processEccentric(sender : AnyObject) {
-        
-        if let res = eccentricField.text.toInt() {
-        
-            eccentric = res;
-        
-        } else {
-        
-            eccentric = 0;
-            eccentricField.text = String(eccentric);
-        }
-    }
-    
-    @IBAction func processHold(sender : AnyObject) {
-        
-        if let res = holdField.text.toInt() {
-            
-            hold = res;
-            
-        } else {
-        
-            hold = 0;
-            holdField.text = String(hold);
-        }
-    }
-    
-    @IBAction func processConcentric(sender : AnyObject) {
-        
-        if let res = concentricField.text.toInt() {
-            
-            concentric = res;
-            
-        } else {
-        
-            concentric = 0;
-            concentricField.text = String(concentric);
-        }
-    }
-    
-    @IBAction func processOptHold(sender : AnyObject) {
-        
-        if let res = optField.text.toInt() {
-            
-            opt = res;
-            
-        } else {
-            
-            opt = 0;
-            optField.text = String(opt);
-        }
-    }
-    
-    
     
     @IBAction func startTimer(sender : AnyObject) {
         
@@ -190,7 +152,7 @@ class ViewController: UIViewController {
                     
                     repCounter = (conFlag ? repCounter+1 : repCounter);
                     
-                    if repCounter == totalRep {
+                    if repCounter == totalReps {
                         
                         sfxPlayer.playFinish();
                         
@@ -200,13 +162,52 @@ class ViewController: UIViewController {
             }
         }
     }
+    // Implements the  protocol
+    /*func () {
     
+    }*/
+    
+    // Implements the PickerView DataSource protocol
+    func numberOfComponentsInPickerView(pickerView: UIPickerView!) -> Int {
+        
+        return numberOfOptions;
+    }
+    
+    func pickerView(pickerView: UIPickerView!, numberOfRowsInComponent component: Int) -> Int {
+        
+        return optionLabels.count;
+    }
+    
+    // Implements the PickerView Delegate protocol
+    func pickerView(pickerView: UIPickerView!, titleForRow row: Int, forComponent component: Int) -> String {
+        return optionLabels[row];
+    }
+    
+    func pickerView(pickerView: UIPickerView!,  didSelectRow row: Int, inComponent component: Int) {
+        
+        switch ( component ){
+            
+            case 0:
+                eccentric = row;
+            
+            case 1:
+                hold = row;
+            
+            case 2:
+                concentric = row;
+            
+            case 3:
+                opt = row;
+            
+            default:
+                break;
+        }
+    }
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
         
     }
 

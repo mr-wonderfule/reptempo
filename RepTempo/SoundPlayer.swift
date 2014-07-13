@@ -104,6 +104,7 @@ class SoundPlayer {
         signalPlayer.prepareToPlay();
         
         audioSession = AVAudioSession.sharedInstance();
-        audioSession.setActive(false, withFlags: AVAudioSessionSetActiveFlags_NotifyOthersOnDeactivation, error: nil);
+
+        audioSession.setActive(false, withOptions: AVAudioSessionSetActiveOptions.OptionNotifyOthersOnDeactivation, error: nil);
     }
 }

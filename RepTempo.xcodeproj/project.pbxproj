@@ -11,12 +11,13 @@
 		B821C64F195F19DC006794B0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B821C64E195F19DC006794B0 /* ViewController.swift */; };
 		B821C654195F19DC006794B0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B821C653195F19DC006794B0 /* Images.xcassets */; };
 		B821C660195F19DC006794B0 /* RepTempoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B821C65F195F19DC006794B0 /* RepTempoTests.swift */; };
+		B828D4E719711842003FA4F1 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B82CBC17195F3E3000EEC813 /* AVFoundation.framework */; };
 		B82CBC16195F2D7600EEC813 /* SoundPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82CBC15195F2D7600EEC813 /* SoundPlayer.swift */; };
-		B82CBC18195F3E3000EEC813 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B82CBC17195F3E3000EEC813 /* AVFoundation.framework */; };
 		B8588241195FBD51008A19C8 /* beat.caf in Resources */ = {isa = PBXBuildFile; fileRef = B8A060BF195F51AB00675B45 /* beat.caf */; };
 		B8588242195FBD5B008A19C8 /* finish.caf in Resources */ = {isa = PBXBuildFile; fileRef = B8A060C0195F51AB00675B45 /* finish.caf */; };
 		B8588243195FBD5B008A19C8 /* signal.caf in Resources */ = {isa = PBXBuildFile; fileRef = B8A060C1195F51AB00675B45 /* signal.caf */; };
 		B8588244195FBD5B008A19C8 /* countdown.caf in Resources */ = {isa = PBXBuildFile; fileRef = B8A060BE195F466200675B45 /* countdown.caf */; };
+		B8A7E2B71971C2B2008B19BA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8A7E2B51971C2B2008B19BA /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,12 +60,12 @@
 		B821C65F195F19DC006794B0 /* RepTempoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepTempoTests.swift; sourceTree = "<group>"; };
 		B82CBC15195F2D7600EEC813 /* SoundPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundPlayer.swift; sourceTree = "<group>"; };
 		B82CBC17195F3E3000EEC813 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		B858824619603023008A19C8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B858824819603070008A19C8 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B8A060BE195F466200675B45 /* countdown.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = countdown.caf; path = "Supporting Files/countdown.caf"; sourceTree = "<group>"; };
 		B8A060BF195F51AB00675B45 /* beat.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = beat.caf; path = "Supporting Files/beat.caf"; sourceTree = "<group>"; };
 		B8A060C0195F51AB00675B45 /* finish.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = finish.caf; path = "Supporting Files/finish.caf"; sourceTree = "<group>"; };
 		B8A060C1195F51AB00675B45 /* signal.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = signal.caf; path = "Supporting Files/signal.caf"; sourceTree = "<group>"; };
+		B8A7E2B61971C2B2008B19BA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,7 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B82CBC18195F3E3000EEC813 /* AVFoundation.framework in Frameworks */,
+				B828D4E719711842003FA4F1 /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -111,7 +112,7 @@
 				B82CBC15195F2D7600EEC813 /* SoundPlayer.swift */,
 				B821C64C195F19DC006794B0 /* AppDelegate.swift */,
 				B821C64E195F19DC006794B0 /* ViewController.swift */,
-				B858824519603023008A19C8 /* Main.storyboard */,
+				B8A7E2B51971C2B2008B19BA /* Main.storyboard */,
 				B821C653195F19DC006794B0 /* Images.xcassets */,
 				B821C64A195F19DC006794B0 /* Supporting Files */,
 			);
@@ -233,6 +234,7 @@
 				B821C654195F19DC006794B0 /* Images.xcassets in Resources */,
 				B8588241195FBD51008A19C8 /* beat.caf in Resources */,
 				B8588244195FBD5B008A19C8 /* countdown.caf in Resources */,
+				B8A7E2B71971C2B2008B19BA /* Main.storyboard in Resources */,
 				B8588242195FBD5B008A19C8 /* finish.caf in Resources */,
 				B8588243195FBD5B008A19C8 /* signal.caf in Resources */,
 			);
@@ -292,10 +294,10 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		B858824519603023008A19C8 /* Main.storyboard */ = {
+		B8A7E2B51971C2B2008B19BA /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				B858824619603023008A19C8 /* Base */,
+				B8A7E2B61971C2B2008B19BA /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -385,9 +387,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = RepTempo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -396,9 +402,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = RepTempo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
