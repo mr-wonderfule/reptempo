@@ -1,4 +1,5 @@
 reptempo
 ========
 
-A rep tempo timer for weight lifting, strength training, etc.
+A rep timer for tempo training in activities such as weight lifting, crossfit, strength training, etc.
+

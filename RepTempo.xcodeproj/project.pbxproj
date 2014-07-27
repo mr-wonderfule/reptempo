@@ -18,6 +18,7 @@
 		B8588243195FBD5B008A19C8 /* signal.caf in Resources */ = {isa = PBXBuildFile; fileRef = B8A060C1195F51AB00675B45 /* signal.caf */; };
 		B8588244195FBD5B008A19C8 /* countdown.caf in Resources */ = {isa = PBXBuildFile; fileRef = B8A060BE195F466200675B45 /* countdown.caf */; };
 		B8A7E2B71971C2B2008B19BA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8A7E2B51971C2B2008B19BA /* Main.storyboard */; };
+		B8BACD5419762DCB00608724 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8BACD5319762DCB00608724 /* TimerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,8 @@
 		B8A060C0195F51AB00675B45 /* finish.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = finish.caf; path = "Supporting Files/finish.caf"; sourceTree = "<group>"; };
 		B8A060C1195F51AB00675B45 /* signal.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = signal.caf; path = "Supporting Files/signal.caf"; sourceTree = "<group>"; };
 		B8A7E2B61971C2B2008B19BA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		B8BACD5319762DCB00608724 /* TimerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
+		B8D1885D19734BA900D21A02 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +97,7 @@
 				B821C649195F19DC006794B0 /* RepTempo */,
 				B821C65C195F19DC006794B0 /* RepTempoTests */,
 				B821C648195F19DC006794B0 /* Products */,
+				B8D1885D19734BA900D21A02 /* README.md */,
 			);
 			sourceTree = "<group>";
 		};
@@ -109,6 +113,7 @@
 		B821C649195F19DC006794B0 /* RepTempo */ = {
 			isa = PBXGroup;
 			children = (
+				B8BACD5319762DCB00608724 /* TimerView.swift */,
 				B82CBC15195F2D7600EEC813 /* SoundPlayer.swift */,
 				B821C64C195F19DC006794B0 /* AppDelegate.swift */,
 				B821C64E195F19DC006794B0 /* ViewController.swift */,
@@ -256,6 +261,7 @@
 			files = (
 				B821C64F195F19DC006794B0 /* ViewController.swift in Sources */,
 				B82CBC16195F2D7600EEC813 /* SoundPlayer.swift in Sources */,
+				B8BACD5419762DCB00608724 /* TimerView.swift in Sources */,
 				B821C64D195F19DC006794B0 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -390,7 +396,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = RepTempo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -405,7 +411,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = RepTempo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
