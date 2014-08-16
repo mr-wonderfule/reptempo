@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B81496221985C1B700D3087B /* SoundDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81496211985C1B700D3087B /* SoundDelegate.swift */; };
+		B81496241985D04700D3087B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B81496231985D04700D3087B /* QuartzCore.framework */; };
 		B821C64D195F19DC006794B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B821C64C195F19DC006794B0 /* AppDelegate.swift */; };
 		B821C64F195F19DC006794B0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B821C64E195F19DC006794B0 /* ViewController.swift */; };
 		B821C654195F19DC006794B0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B821C653195F19DC006794B0 /* Images.xcassets */; };
@@ -53,6 +55,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B81496211985C1B700D3087B /* SoundDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundDelegate.swift; sourceTree = "<group>"; };
+		B81496231985D04700D3087B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		B821C647195F19DC006794B0 /* RepTempo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RepTempo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B821C64C195F19DC006794B0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B821C64E195F19DC006794B0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -76,6 +80,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B81496241985D04700D3087B /* QuartzCore.framework in Frameworks */,
 				B828D4E719711842003FA4F1 /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -93,6 +98,7 @@
 		B821C63E195F19DC006794B0 = {
 			isa = PBXGroup;
 			children = (
+				B81496231985D04700D3087B /* QuartzCore.framework */,
 				B82CBC17195F3E3000EEC813 /* AVFoundation.framework */,
 				B821C649195F19DC006794B0 /* RepTempo */,
 				B821C65C195F19DC006794B0 /* RepTempoTests */,
@@ -114,6 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				B8BACD5319762DCB00608724 /* TimerView.swift */,
+				B81496211985C1B700D3087B /* SoundDelegate.swift */,
 				B82CBC15195F2D7600EEC813 /* SoundPlayer.swift */,
 				B821C64C195F19DC006794B0 /* AppDelegate.swift */,
 				B821C64E195F19DC006794B0 /* ViewController.swift */,
@@ -260,6 +267,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B821C64F195F19DC006794B0 /* ViewController.swift in Sources */,
+				B81496221985C1B700D3087B /* SoundDelegate.swift in Sources */,
 				B82CBC16195F2D7600EEC813 /* SoundPlayer.swift in Sources */,
 				B8BACD5419762DCB00608724 /* TimerView.swift in Sources */,
 				B821C64D195F19DC006794B0 /* AppDelegate.swift in Sources */,

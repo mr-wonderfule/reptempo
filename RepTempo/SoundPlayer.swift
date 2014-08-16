@@ -6,93 +6,98 @@
 //  Copyright (c) 2014 Nathan Trans. All rights reserved.
 //
 
-import Foundation
 import AVFoundation
 
 class SoundPlayer {
     
     var audioSession : AVAudioSession;
     
-    var beatURL : NSURL;
+//    var beatURL : NSURL;
     var beatPlayer : AVAudioPlayer;
     
-    var countdownURL : NSURL;
+//    var countdownURL : NSURL;
     var countdownPlayer : AVAudioPlayer;
     
-    var finishURL : NSURL;
+//    var finishURL : NSURL;
     var finishPlayer : AVAudioPlayer;
     
-    var signalURL : NSURL;
+//    var signalURL : NSURL;
     var signalPlayer : AVAudioPlayer;
     
     let shortStartDelay : NSTimeInterval = 0.01;
-    
+    let filetype : String = "caf";
+    let files : [String] = ["beat","countdown","finish","signal"];
     init(){
         
-        audioSession = AVAudioSession.sharedInstance();
-        audioSession.setCategory(AVAudioSessionCategoryPlayback, error: nil);
-        audioSession.setActive(false, error: nil);
-
-        let myBundle : NSBundle = NSBundle.mainBundle();
+        self.audioSession = AVAudioSession.sharedInstance();
+        self.audioSession.setCategory(AVAudioSessionCategoryPlayback, error: nil);
+        self.audioSession.setActive(false, error: nil);
         
-        beatURL = NSURL(fileURLWithPath: myBundle.pathForResource("beat", ofType: "caf"));
-        beatPlayer = AVAudioPlayer(contentsOfURL: beatURL, error: nil);
-        beatPlayer.prepareToPlay();
+        self.beatPlayer = SoundDelegate(name: files[0], ofType: filetype);
+        self.countdownPlayer = SoundDelegate(name: files[1], ofType: filetype);
+        self.finishPlayer = SoundDelegate(name: files[2], ofType: filetype);
+        self.signalPlayer = SoundDelegate(name: files[3], ofType: filetype);
         
-        countdownURL = NSURL(fileURLWithPath: myBundle.pathForResource("countdown", ofType: "caf"));
-        countdownPlayer = AVAudioPlayer(contentsOfURL: countdownURL, error: nil);
-        countdownPlayer.prepareToPlay();
 
-        finishURL = NSURL(fileURLWithPath: myBundle.pathForResource("finish", ofType: "caf"));
-        finishPlayer = AVAudioPlayer(contentsOfURL: finishURL, error: nil);
-        finishPlayer.prepareToPlay();
-
-        signalURL = NSURL(fileURLWithPath: myBundle.pathForResource("signal", ofType: "caf"));
-        signalPlayer = AVAudioPlayer(contentsOfURL: signalURL, error: nil);
-        signalPlayer.prepareToPlay();
-
+//        let myBundle : NSBundle = NSBundle.mainBundle();
         
+//        beatURL = NSURL(fileURLWithPath: myBundle.pathForResource("beat", ofType: "caf"));
+//        beatPlayer = AVAudioPlayer(contentsOfURL: beatURL, error: nil);
+//        beatPlayer.prepareToPlay();
+//
+//        countdownURL = NSURL(fileURLWithPath: myBundle.pathForResource("countdown", ofType: "caf"));
+//        countdownPlayer = AVAudioPlayer(contentsOfURL: countdownURL, error: nil);
+//        countdownPlayer.prepareToPlay();
+//
+//        finishURL = NSURL(fileURLWithPath: myBundle.pathForResource("finish", ofType: "caf"));
+//        finishPlayer = AVAudioPlayer(contentsOfURL: finishURL, error: nil);
+//        finishPlayer.prepareToPlay();
+//
+//        signalURL = NSURL(fileURLWithPath: myBundle.pathForResource("signal", ofType: "caf"));
+//        signalPlayer = AVAudioPlayer(contentsOfURL: signalURL, error: nil);
+//        signalPlayer.prepareToPlay();
         
     }
     
     func now() -> NSTimeInterval {
-        return beatPlayer.deviceCurrentTime;
+        return self.beatPlayer.deviceCurrentTime;
     }
     
     func playBeat(){
-        beatPlayer.playAtTime( now() + shortStartDelay );
+        self.beatPlayer.playAtTime( self.now() + self.shortStartDelay );
     }
     
     func playCountdown() {
-        countdownPlayer.playAtTime( now() + shortStartDelay );
+        self.countdownPlayer.playAtTime( self.now() + self.shortStartDelay );
     }
     
     func playFinish(){
-        finishPlayer.playAtTime( now() + shortStartDelay );
+        self.finishPlayer.playAtTime( self.now() + self.shortStartDelay );
     }
     
     func playSignal() {
-        signalPlayer.playAtTime( now() + shortStartDelay );
+        self.signalPlayer.playAtTime( self.now() + self.shortStartDelay );
     }
     
     func playBeat(time : NSTimeInterval){
-        beatPlayer.playAtTime( now() + time + shortStartDelay );
+        self.beatPlayer.playAtTime( self.now() + time + self.shortStartDelay );
     }
     
     func playCountdown(time : NSTimeInterval) {
-        countdownPlayer.playAtTime( now() + time + shortStartDelay );
+        self.countdownPlayer.playAtTime( self.now() + time + self.shortStartDelay );
     }
     
     func playFinish(time : NSTimeInterval){
-        finishPlayer.playAtTime( now() + time + shortStartDelay );
+        self.finishPlayer.playAtTime( self.now() + time + self.shortStartDelay );
     }
     
     func playSignal(time : NSTimeInterval) {
-        signalPlayer.playAtTime( now() + time + shortStartDelay );
+        self.signalPlayer.playAtTime( self.now() + time + self.shortStartDelay );
     }
     
     
     func stopAll(){
+        /*
         beatPlayer.stop();
         countdownPlayer.stop();
         finishPlayer.stop();
@@ -102,9 +107,10 @@ class SoundPlayer {
         countdownPlayer.prepareToPlay();
         finishPlayer.prepareToPlay();
         signalPlayer.prepareToPlay();
+        */
         
-        audioSession = AVAudioSession.sharedInstance();
+        self.audioSession = AVAudioSession.sharedInstance();
 
-        audioSession.setActive(false, withOptions: AVAudioSessionSetActiveOptions.OptionNotifyOthersOnDeactivation, error: nil);
+        self.audioSession.setActive(false, withOptions: AVAudioSessionSetActiveOptions.OptionNotifyOthersOnDeactivation, error: nil);
     }
 }

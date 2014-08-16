@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6185.7" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6205" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6181.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6198"/>
     </dependencies>
     <scenes>
         <!--RepTempo-->
@@ -13,7 +13,7 @@
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS" customClass="UIControl">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="# of Reps" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WVe-UD-IdC">
@@ -27,9 +27,9 @@
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="10" borderStyle="roundedRect" textAlignment="right" clearsOnBeginEditing="YES" minimumFontSize="31" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Bgb-Tq-NqY">
                                 <rect key="frame" x="158" y="32" width="60" height="30"/>
-                                <color key="backgroundColor" red="0.15294117647058825" green="0.15686274509803921" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.16470588235294117" green="0.20000000000000001" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="textColor" red="0.65098039215686276" green="0.88627450980392153" blue="0.1803921568627451" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.24705882352941178" green="0.69803921568627447" blue="0.066666666666666666" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="31"/>
                                 <textInputTraits key="textInputTraits" spellCheckingType="no" keyboardType="numbersAndPunctuation" keyboardAppearance="alert"/>
                                 <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
@@ -42,7 +42,7 @@
                             </textField>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i7M-Lq-Ory">
                                 <rect key="frame" x="0.0" y="-162" width="320" height="162"/>
-                                <color key="backgroundColor" red="0.1137254902" green="0.1137254902" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.090196078431372548" green="0.11372549019607843" blue="0.14509803921568626" alpha="1" colorSpace="calibratedRGB"/>
                                 <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="0.0" y="85" width="320" height="162"/>
                                 </variation>
@@ -53,7 +53,7 @@
                             </pickerView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="wcn-D3-ZL1">
                                 <rect key="frame" x="-61" y="-14" width="123" height="29"/>
-                                <color key="backgroundColor" red="0.1137254902" green="0.1137254902" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.090196078431372548" green="0.11372549019607843" blue="0.14509803921568626" alpha="1" colorSpace="calibratedRGB"/>
                                 <segments>
                                     <segment title="Up"/>
                                     <segment title="Down"/>
@@ -74,6 +74,7 @@
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="IoL-oa-He7">
                                 <rect key="frame" x="-61" y="-14" width="123" height="29"/>
+                                <color key="backgroundColor" red="0.090196078431372548" green="0.11372549019607843" blue="0.14509803921568626" alpha="1" colorSpace="calibratedRGB"/>
                                 <segments>
                                     <segment title="Up"/>
                                     <segment title="Down"/>
@@ -92,22 +93,15 @@
                                     <rect key="frame" x="245" y="255" width="75" height="29"/>
                                 </variation>
                             </label>
-                            <view hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Gb-L7-qjw" customClass="TimerView" customModule="RepTempo" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <color key="backgroundColor" red="0.11372549019607843" green="0.11372549019607843" blue="0.11372549019607843" alpha="1" colorSpace="calibratedRGB"/>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="85" width="320" height="162"/>
-                                </variation>
-                            </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pad-9t-gc2">
                                 <rect key="frame" x="50" y="332" width="44" height="44"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="18"/>
                                 <state key="normal" title="Start">
-                                    <color key="titleColor" red="0.65098039215686276" green="0.88627450980392153" blue="0.1803921568627451" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="0.24705882352941178" green="0.69803921568627447" blue="0.066666666666666666" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="63" y="334" width="66" height="66"/>
+                                    <rect key="frame" x="63" y="334" width="70" height="70"/>
                                 </variation>
                                 <connections>
                                     <action selector="startTimer:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="hxp-mL-Cp9"/>
@@ -117,18 +111,18 @@
                                 <rect key="frame" x="158" y="332" width="44" height="44"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="18"/>
                                 <state key="normal" title="Stop">
-                                    <color key="titleColor" red="0.95686274509803915" green="0.12156862745098039" blue="0.13725490196078433" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="0.83921568627450982" green="0.050980392156862744" blue="0.050980392156862744" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="191" y="334" width="66" height="66"/>
+                                    <rect key="frame" x="191" y="334" width="70" height="70"/>
                                 </variation>
                                 <connections>
                                     <action selector="stopTimer:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="0xf-CA-tBt"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.11372549019607843" green="0.11372549019607843" blue="0.11372549019607843" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.090196078431372548" green="0.11372549019607843" blue="0.14509803921568626" alpha="1" colorSpace="calibratedRGB"/>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="i7M-Lq-Ory"/>
@@ -136,7 +130,6 @@
                                 <exclude reference="1sr-JU-OJr"/>
                                 <exclude reference="IoL-oa-He7"/>
                                 <exclude reference="mNn-dg-WZL"/>
-                                <exclude reference="8Gb-L7-qjw"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -146,7 +139,6 @@
                                 <include reference="1sr-JU-OJr"/>
                                 <include reference="IoL-oa-He7"/>
                                 <include reference="mNn-dg-WZL"/>
-                                <include reference="8Gb-L7-qjw"/>
                             </mask>
                         </variation>
                         <connections>
@@ -161,7 +153,6 @@
                         <outlet property="pickerView" destination="i7M-Lq-Ory" id="gbx-vN-SDz"/>
                         <outlet property="startButton" destination="Pad-9t-gc2" id="qjZ-M2-hox"/>
                         <outlet property="stopButton" destination="Oyl-hL-R5E" id="Vng-9B-DMH"/>
-                        <outlet property="timerView" destination="8Gb-L7-qjw" id="dJI-Xq-Xfi"/>
                         <outlet property="totalRepField" destination="Bgb-Tq-NqY" id="6Pt-2u-ndl"/>
                     </connections>
                 </viewController>

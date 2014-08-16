@@ -26,7 +26,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     var timeInMilliseconds  : Float = 0.000;
     
-    var stopButtonTitle : String = "Stop";
+    var startButtonTitle: String = "Start";
+    var stopButtonTitle : String = "Reset";
     var isPaused : Bool = false;
     
     let sfxPlayer = SoundPlayer();
@@ -40,146 +41,202 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     let invalidInputAlert : UIAlertView = UIAlertView(title: "Invalid input", message: "Not a number. Please try again.", delegate: nil, cancelButtonTitle: "OK");
     
     
-    let bgColor = UIColor(red: CGFloat(23/255), green: CGFloat(29/255), blue: CGFloat(37/255), alpha: 1.0);
-    let sectionColor = UIColor(red: CGFloat(42/255), green: CGFloat(51/255), blue: CGFloat(64/255), alpha: 1.0);
-    let textColor = UIColor(red: CGFloat(195/255), green: CGFloat(215/255), blue: CGFloat(239/255), alpha: 1.0);
-    let customRed = UIColor(red: CGFloat(214/255), green: CGFloat(13/255), blue: CGFloat(13/255), alpha: 1.0);
-    let customGreen = UIColor(red: CGFloat(63/255), green: CGFloat(178/255), blue: CGFloat(17/255), alpha: 1.0);
+    let bgColor = UIColor(red: CGFloat(23.0/255.0), green: CGFloat(29.0/255.0), blue: CGFloat(37.0/255.0), alpha: 1.0);
+    let sectionColor = UIColor(red: CGFloat(42.0/255.0), green: CGFloat(51.0/255.0), blue: CGFloat(64.0/255.0), alpha: 1.0);
+    let textColor = UIColor(red: CGFloat(195.0/255.0), green: CGFloat(215.0/255.0), blue: CGFloat(239.0/255.0), alpha: 1.0);
+    let customRed = UIColor(red: CGFloat(214.0/255.0), green: CGFloat(13.0/255.0), blue: CGFloat(13.0/255.0), alpha: 1.0);
+    let customGreen = UIColor(red: CGFloat(63.0/255.0), green: CGFloat(178.0/255.0), blue: CGFloat(17.0/255.0), alpha: 1.0);
 
-    //let blurryView = UIVisualEffectView(effect: UIBlurEffect(style: .Dark));
-    
-    @IBOutlet var totalRepField : UITextField;
-    
-    @IBOutlet var timerView : TimerView;
-    @IBOutlet var pickerView : UIPickerView;
-    
-    @IBOutlet var eccentricSegmentedControl : UISegmentedControl;
-    @IBOutlet var concentricSegmentedControl : UISegmentedControl;
     
     
-    @IBOutlet var startButton : UIButton;
-    @IBOutlet var stopButton  : UIButton;
+    @IBOutlet var totalRepField : UITextField?;
+    
+    let timerView = TimerView();
+    @IBOutlet var pickerView : UIPickerView?;
+    
+    @IBOutlet var eccentricSegmentedControl : UISegmentedControl?;
+    @IBOutlet var concentricSegmentedControl : UISegmentedControl?;
+    
+    
+    @IBOutlet var startButton : UIButton?;
+    @IBOutlet var stopButton  : UIButton?;
 
     
     
     @IBAction func backgroundTap() {
-        totalRepField.resignFirstResponder();
+        self.totalRepField?.resignFirstResponder();
         view.endEditing(true);
     }
     
     @IBAction func sanitizeInput(sender: AnyObject) {
-        setTotalReps();
+        self.setTotalReps();
     }
     
     @IBAction func startTimer(sender : AnyObject) {
         
-        isPaused = false;
-        pickerView.hidden = true;
-        timerView.hidden = false;
-        
-        stopButtonTitle = "Stop";
-        stopButton.setTitle(stopButtonTitle, forState: UIControlState.Normal);
-        
-        updateTimer = NSTimer.scheduledTimerWithTimeInterval(interval, target: self, selector: "update", userInfo: nil, repeats: true);
-        
-        sfxPlayer.playCountdown();
-    }
-    
-    @IBAction func stopTimer(sender : AnyObject) {
-        
-        isPaused = true;
-        
-        pickerView.hidden = false;
-        timerView.hidden = true;
-        
-        sfxPlayer.stopAll();
-        
-        switch stopButtonTitle {
+        switch self.startButtonTitle {
             
-            case "Stop":
+            case "Pause":
                 
-                if timeInMilliseconds > 0.000 {
-                    stopButtonTitle = "Reset";
-                    stopButton.setTitle(stopButtonTitle, forState: UIControlState.Normal);
-                }
+                self.isPaused = true;
+                self.timerView.pause();
             
-            case "Reset":
-                
-                timeInMilliseconds = 0.000;
-                
-                repCounter = 0;
-                eccCounter = 0;
-                conCounter = 0;
-                
-                stopButtonTitle = "Stop";
-                stopButton.setTitle(stopButtonTitle, forState: UIControlState.Normal);
+                self.startButtonTitle = "Resume";
+                self.startButton?.setTitle(self.startButtonTitle, forState: UIControlState.Normal);
             
-                updateTimer!.invalidate();
-                updateTimer = nil;
+                self.stopButton?.setTitleColor(self.customRed, forState: UIControlState.Normal);
+                self.stopButton?.enabled = self.isPaused;
             
+            
+            case "Resume":
+                
+                self.isPaused = false;
+                self.timerView.resume();
+            
+                self.startButtonTitle = "Pause";
+                self.startButton?.setTitle(self.startButtonTitle, forState: UIControlState.Normal);
+            
+                self.stopButton?.setTitleColor(self.sectionColor, forState: UIControlState.Normal);
+                self.stopButton?.enabled = self.isPaused;
+
+            
+            case "Start":
+                
+                self.isPaused = false;
+                self.pickerView?.hidden = true;
+                self.timerView.hidden = self.isPaused;
+                
+                //sfxPlayer.playCountdown();
+                
+                self.updateTimer = NSTimer.scheduledTimerWithTimeInterval(self.interval, target: self, selector: "update", userInfo: nil, repeats: true);
+                
+                
+                
+                self.timerView.start();
+                
+                self.startButton?.setTitleColor(self.textColor, forState: UIControlState.Normal);
+                self.startButtonTitle = "Pause";
+                self.startButton?.setTitle(self.startButtonTitle, forState: UIControlState.Normal);
+            
+                self.eccentricSegmentedControl?.enabled = self.isPaused;
+                self.concentricSegmentedControl?.enabled = self.isPaused;
             
             default:
                 break;
         }
     }
     
+    @IBAction func stopTimer(sender : AnyObject) {
+        
+        self.isPaused = true;
+        
+        self.pickerView?.hidden = false;
+        
+        self.timerView.hidden = self.isPaused;
+        self.timerView.reset();
+        
+        self.updateTimer!.invalidate();
+        self.updateTimer = nil;
+        
+        self.sfxPlayer.stopAll();
+        
+        self.timeInMilliseconds = 0.000;
+                
+        self.repCounter = 0;
+        self.eccCounter = 0;
+        self.conCounter = 0;
+        
+        self.stopButton?.setTitle(self.stopButtonTitle, forState: UIControlState.Normal);
+        self.stopButton?.setTitleColor(self.sectionColor, forState: UIControlState.Normal);
+        self.stopButton?.enabled = false;
+
+        self.startButton?.setTitleColor(self.customGreen, forState: UIControlState.Normal);
+        self.startButtonTitle = "Start";
+        self.startButton?.setTitle(self.startButtonTitle, forState: UIControlState.Normal);
+
+        self.eccentricSegmentedControl?.enabled = self.isPaused;
+        self.concentricSegmentedControl?.enabled = self.isPaused;
+    }
+    
     func setTotalReps() {
         
-        if let reps = totalRepField.text.toInt() {
+        if let reps = self.totalRepField?.text.toInt() {
             
-            totalReps = reps;
+            self.totalReps = reps;
 
-            let max = maxReps.toInt();
+            let max = self.maxReps.toInt();
             
-            if totalReps > max {
+            if self.totalReps > max {
                 
-                totalReps = max!;
-            }
-
-            if DEBUG {
-                println("setting totalReps to: \(totalReps)")
+                self.totalReps = max!;
             }
             
         } else {
             
-            invalidInputAlert.show();
+            self.invalidInputAlert.show();
         }
     }
     
-    func update(){
+    func setTotalTime(totalTime: CFTimeInterval) {
+        self.timerView.setDuration(totalTime);
+    }
+    
+    func toggleSegmentedControlFromKey(key: String) {
+        
+        if key == "ecc" {
+            
+            let oppositeIndex = (self.eccentricSegmentedControl?.selectedSegmentIndex == 0) ? 1 : 0;
+            self.concentricSegmentedControl?.setEnabled(true, forSegmentAtIndex: oppositeIndex);
+            
+        }
+        else {
+        
+            let oppositeIndex = (self.concentricSegmentedControl?.selectedSegmentIndex == 0) ? 1 : 0;
+            self.concentricSegmentedControl?.setEnabled(true, forSegmentAtIndex: oppositeIndex);
+        }
+    }
+    
+    func update() {
         
         if !isPaused {
             
-            timeInMilliseconds += Float(interval);
+            self.timeInMilliseconds += Float(self.interval);
             
-            let countdownDuration = Float(sfxPlayer.countdownPlayer.duration);
+            let countdownDuration = Float(self.sfxPlayer.countdownPlayer.duration);
             
-            if timeInMilliseconds > countdownDuration {
+            if self.timeInMilliseconds > countdownDuration {
                 
                 //sfxPlayer.playBeat();
-                timerView.update(atTime: timeInMilliseconds);
 
-                eccCounter++;
-                conCounter++;
+                self.eccCounter++;
+                self.conCounter++;
             
 
-                let totalEccentricTime  = eccentric + hold + Int(countdownDuration);
-                let totalConcentricTime = concentric + opt + Int(countdownDuration);
+                let totalEccentricTime  = self.eccentric + self.hold + Int(countdownDuration);
+                let totalConcentricTime = self.concentric + self.opt + Int(countdownDuration);
                 
-                let eccFlag = eccCounter % totalEccentricTime == 0;
-                let conFlag = conCounter % totalConcentricTime == 0;
+                let eccFlag = self.eccCounter == totalEccentricTime;
+                let conFlag = self.conCounter == totalConcentricTime;
 
                 if eccFlag || conFlag {
                     
-                    sfxPlayer.playSignal();
+                    self.sfxPlayer.playSignal();
                     
-                    repCounter = (conFlag ? repCounter+1 : repCounter);
+                    self.eccCounter = (eccFlag ? 0 : self.eccCounter);
+                    self.conCounter = (conFlag ? 0 : self.conCounter);
                     
-                    if repCounter == totalReps {
+                    if conFlag {
+                    
+                        self.repCounter++;
+                    }
+                    
+                    //repCounter = (conFlag ? repCounter+1 : repCounter);
+                    
+                    if self.repCounter == self.totalReps {
                         
-                        sfxPlayer.playFinish();
+                        self.sfxPlayer.playFinish();
                         
-                        stopTimer(self);
+                        self.stopTimer(self);
                     }
                 }
             }
@@ -190,12 +247,12 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     // Implements the PickerView DataSource protocol
     func numberOfComponentsInPickerView(pickerView: UIPickerView!) -> Int {
         
-        return numberOfOptions;
+        return self.numberOfOptions;
     }
     
     func pickerView(pickerView: UIPickerView!, numberOfRowsInComponent component: Int) -> Int {
         
-        return numberOfValues;
+        return self.numberOfValues;
     }
     
     
@@ -210,38 +267,44 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     func pickerView(pickerView: UIPickerView!,  didSelectRow row: Int, inComponent component: Int) {
         
-        if find([0,2], component) && row == 0 {
+        // Eccentric and concentric seconds should not be 0
+        if find([0,2], component) != nil && row == 0 {
             
-            self.pickerView.selectRow(1, inComponent: component, animated: true);
+            self.pickerView?.selectRow(1, inComponent: component, animated: true);
             
             if component == 0 {
             
-                eccentric = 1;
+                self.eccentric = 1;
             }
             else {
                 
-                concentric = 1;
+                self.concentric = 1;
             }
-            return;
+        }
+        else {
+            
+            switch ( component ){
+            
+                case 0:
+                    self.eccentric = row;
+            
+                case 1:
+                    self.hold = row;
+            
+                case 2:
+                    self.concentric = row;
+            
+                case 3:
+                    self.opt = row;
+            
+                default:
+                    break;
+            }
         }
         
-        switch ( component ){
-            
-            case 0:
-                eccentric = row;
-            
-            case 1:
-                hold = row;
-            
-            case 2:
-                concentric = row;
-            
-            case 3:
-                opt = row;
-            
-            default:
-                break;
-        }
+        let currentTotalTime = CFTimeInterval((self.eccentric + self.hold + self.concentric + self.opt) * self.totalReps) + self.sfxPlayer.countdownPlayer.duration;
+        
+        self.setTotalTime(currentTotalTime);
     }
     
     func pickerView(pickerView: UIPickerView!, viewForRow row: Int, forComponent component: Int, reusingView view: UIView!) -> UIView! {
@@ -254,7 +317,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         }
         
         label!.textColor = UIColor.whiteColor();
-        label!.backgroundColor = self.sectionColor;
+        label!.backgroundColor = self.bgColor;
         label!.font = UIFont(name: "HelveticaNeue-Medium", size: 18);
         label!.text = String( format: "%d", row);
         
@@ -266,7 +329,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     // Implements the UITextField Delegate protocol
     func textField(textField: UITextField!, shouldChangeCharactersInRange range: NSRange, replacementString string: String!) -> Bool {
     
-        if (range.location + range.length) > countElements(totalRepField.text!) {
+        if (range.location + range.length) > self.totalRepField?.text?.utf16Count {
             return false;
         }
         
@@ -275,6 +338,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         return newLength <= countElements(self.maxReps);
     }
     
+    // Default? Yeah, I'm good.
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return UIStatusBarStyle.LightContent;
     }
@@ -284,13 +348,28 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        // Eccentric and concentric seconds should not be 0
         for component in [0,2] {
-            self.pickerView.selectRow(1, inComponent: component, animated: false);
+            self.pickerView?.selectRow(1, inComponent: component, animated: false);
         }
         
+        self.setTotalTime(2.0);
+        
+        self.stopButton?.setTitle(self.stopButtonTitle, forState: UIControlState.Normal);
+        self.stopButton?.setTitleColor(self.sectionColor, forState: UIControlState.Normal);
+        self.stopButton?.setTitleShadowColor(self.bgColor, forState: UIControlState.Normal);
+        self.stopButton?.enabled = false;
+        
+        self.startButton?.setTitleShadowColor(self.bgColor, forState: UIControlState.Normal);
+                
+        
+        self.view.addSubview(timerView);
         
         
-        //view.addSubview(blurryView);
+        self.eccentricSegmentedControl?.addTarget(self, action: "toggleSegmentedControlFromKey(\"ecc\"", forControlEvents: UIControlEvents.ValueChanged);
+        
+        self.concentricSegmentedControl?.addTarget(self, action: "toggleSegmentedControlFromKey(\"con\"", forControlEvents: UIControlEvents.ValueChanged);
+
     }
 
     override func didReceiveMemoryWarning() {
